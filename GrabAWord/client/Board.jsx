@@ -2,9 +2,9 @@ Board = React.createClass({
     mixins: [ReactMeteorData],
 
     getMeteorData() {
-      var loggedIn = Meteor.user();
+      var user = Meteor.user();
       return {
-          loggedIn: loggedIn,
+          user: user,
           width: 4,
           height: 5,
           letters: ['A','B','C','D','E',
@@ -41,17 +41,17 @@ Board = React.createClass({
             onClick  = {this.tileClicked}
             />);
       }
-      rows.push(<LineBreak/>);
+      rows.push(<LineBreak key={hInd}/>);
       rows.push(row);
     }
-    rows.push(<LineBreak/>);
+    rows.push(<LineBreak key="end"/>);
 
     return (
       <div className="boardContainer">
         <CurrentSelection/>
         {rows}
         <br></br>
-        <GrabButton enabled={this.data.loggedIn} onClick={this.grabSelectedWord()}/>
+        <GrabButton enabled={this.data.user} onClick={this.grabSelectedWord}/>
     	</div>
     );
   }
@@ -69,10 +69,8 @@ Tile = React.createClass({
 
 
 LineBreak = React.createClass({
-  //TODO - this causes 9
-  // Warning: Each child in an array or iterator should have a unique "key" prop.
   render(){
-    return <br></br>
+    return <br key = {this.props.key}></br>
   }
 });
 
