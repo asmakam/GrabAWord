@@ -6,11 +6,11 @@ GrabIndicator = React.createClass({
   render() {
     if (this.props.smile) {
       return (
-        <div><p> :) </p></div>
+        <p> :) </p>
       );
     }
     return (
-       <div><p> :( </p></div>
+      <p>  :( </p>
     );
   }
 

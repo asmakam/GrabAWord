@@ -28,7 +28,7 @@ Board = React.createClass({
     // --> Grab the word
       Meteor.call('grabWord', this.state.selectedWord, this.data.board._id,
         this.data.userId, (err, res) => {
-          this.state.showGrabIndicator = true;
+        this.state.showGrabIndicator = true;
         this.state.grabIndicatorState = res;
       });
 
@@ -104,9 +104,12 @@ Board = React.createClass({
         <label ref="textInput"> </label> <br> </br>
         {rows}
         <br></br>
-        <GrabButton enabled={this.data.user} onClick={this.grabSelectedWord}/>
+        <span>
+          <GrabButton enabled={this.data.user} onClick={this.grabSelectedWord}/>
+          <GrabIndicator smile={this.state.grabIndicatorState} /> 
+        </span>
         <WordList boardId={boardId} userId={userId} />
-        { this.state.showGrabIndicator ? <GrabIndicator smile={this.state.grabIndicatorState} /> : null }
+       
       </div>
     );
   }
