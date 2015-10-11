@@ -11,8 +11,11 @@ Game = React.createClass({
   render() {
     return (
       <div className="container">
-    		<p> Main Game </p>
+    		
+        <p> Main Game </p>
 
+        <AccountsUIWrapper />
+        
         <Board />
         
     	</div>
