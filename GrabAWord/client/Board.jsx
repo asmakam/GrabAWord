@@ -1,23 +1,29 @@
 Board = React.createClass({
-  /*
-     Uncomment when needed
     mixins: [ReactMeteorData],
 
     getMeteorData() {
-
+      return {
+          width: 4,
+          height: 5,
+          letters: ['A','B','C','D','E',
+                    'F','G','H','I','J',
+                    'K','L','M','N','O',
+                    'P','Q','R','S','T',
+                    'U','V','W','X','Y']
+      };
     },
-  */
+
 
   render() {
-    const WIDTH = 4; // tiles
-    const HEIGHT = 5; // tiles
-
     var rows = [];
-    for(var hInd=0; hInd<HEIGHT; hInd++){
+    for(var hInd=0; hInd<this.data.height; hInd++){
       var row = [];
-      for(var wInd=0; wInd<WIDTH; wInd++){
-        row.push('Tile');
+      for(var wInd=0; wInd<this.data.width; wInd++){
+        var tileInd = hInd*this.data.height+wInd; // row major
+        var tileAlphabet = this.data.letters[tileInd];
+        row.push(<Tile alphabet={tileAlphabet}/>);
       }
+      rows.push('<b>');
       rows.push(row);
     }
 
@@ -25,7 +31,6 @@ Board = React.createClass({
       <div className="boardContainer">
     		<p> Board </p>
         {rows}
-        <Tile/>
     	</div>
     );
   }
