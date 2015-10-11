@@ -1,6 +1,10 @@
 Board = React.createClass({
     mixins: [ReactMeteorData],
 
+    getInitialState() {
+      return { selectedWord: ''};
+    },
+
     getMeteorData() {
       var user = Meteor.user();
       var handle = Meteor.subscribe('latestBoard');
@@ -15,11 +19,18 @@ Board = React.createClass({
 
   grabSelectedWord(){
     //TODO - clear selection, post to server
+    this.state.selectedWord = '';
+    React.findDOMNode(this.refs.textInput).innerHTML = this.state.selectedWord;
+
     //TODO - how to show feedback if word was invalid? (valid words will show up on right)
     console.log('Grab!');
   },
 
   tileClicked(event){
+
+    this.state.selectedWord = this.state.selectedWord + event.target.innerHTML;
+    React.findDOMNode(this.refs.textInput).innerHTML = this.state.selectedWord;
+
     //TODO - toggle tile
     // Take care to use tileInds(key) (since letters could repeat)
     //TODO - add/remove from CurrentSelection (State?)
@@ -53,7 +64,7 @@ Board = React.createClass({
     let userId = (this.data.user) ? this.data.userId: "";
     return (
       <div className="boardContainer">
-        <CurrentSelection/>
+        <label ref="textInput"> </label> <br> </br>
         {rows}
         <br></br>
         <GrabButton enabled={this.data.user} onClick={this.grabSelectedWord}/>
@@ -97,8 +108,12 @@ CurrentSelection = React.createClass({
   render(){
     return(
       <div className="CurrentSelection">
-
+          <label> Hello + {this.props.selectedWord} </label>
       </div>
     )
   }
 });
+
+
+//<CurrentSelection selcetedWord={this.state.selectedWord}/>
+
