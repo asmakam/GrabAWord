@@ -13,7 +13,6 @@ Board = React.createClass({
       };
     },
 
-
   render() {
     var rows = [];
     for(var hInd=0; hInd<this.data.height; hInd++){
@@ -23,14 +22,17 @@ Board = React.createClass({
         var tileAlphabet = this.data.letters[tileInd];
         row.push(<Tile alphabet={tileAlphabet}/>);
       }
-      rows.push('<b>');
+      rows.push(<LineBreak/>);
       rows.push(row);
     }
+    rows.push(<LineBreak/>);
 
     return (
       <div className="boardContainer">
-    		<p> Board </p>
+        <p>[Currently selected tiles/word go here] (x -clear button to remove all selection)</p>
         {rows}
+        <br></br>
+        <button>Grab!</button>
     	</div>
     );
   }
@@ -41,4 +43,11 @@ Tile = React.createClass({
     render(){
       return <button>{this.props.alphabet}</button>
     }
+});
+
+
+LineBreak = React.createClass({
+  render(){
+    return <br></br>
+  }
 });
