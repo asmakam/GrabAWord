@@ -3,15 +3,12 @@ Board = React.createClass({
 
     getMeteorData() {
       var user = Meteor.user();
+      var handle = Meteor.subscribe('latestBoard');
       return {
           user: user,
           width: 4,
           height: 5,
-          letters: ['A','B','C','D','E',
-                    'F','G','H','I','J',
-                    'K','L','M','N','O',
-                    'P','Q','R','S','T',
-                    'U','V','W','X','Y']
+          board: Boards.findOne()
       };
     },
 
@@ -28,12 +25,18 @@ Board = React.createClass({
   },
 
   render() {
+
+    if (!this.data.board) {
+      return <LoadingSpinner />;
+    }
+
     var rows = [];
+    let {tiles} = this.data.board;
     for(var hInd=0; hInd<this.data.height; hInd++){
       var row = [];
       for(var wInd=0; wInd<this.data.width; wInd++){
-        var tileInd = hInd*this.data.height+wInd; // row major
-        var tileAlphabet = this.data.letters[tileInd];
+        var tileInd = hInd*(this.data.height-1)+wInd; // row major
+        var tileAlphabet = tiles[tileInd];
         row.push(<Tile
             key      = {tileInd}
             alphabet = {tileAlphabet}
