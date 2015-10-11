@@ -3,7 +3,7 @@ Board = React.createClass({
 
     getInitialState() {
       return { selectedWord: '',
-               enableTiles: true};
+               selectedTiles: []};
     },
 
     getMeteorData() {
@@ -18,14 +18,21 @@ Board = React.createClass({
       };
     },
 
-  grabSelectedWord(){
-    //TODO - clear selection, post to server
+  grabSelectedWord(event){
+    //TODO - clear selection -- Complete
+
+    // Clear display label and reenable tiles for clicking 
     this.state.selectedWord = '';
     React.findDOMNode(this.refs.textInput).innerHTML = this.state.selectedWord;
     
-    this.state.enableTiles = true;
+    // Re enable tiles and initialize to pick next word
+    for(var idx = 0; idx < this.state.selectedTiles.length; idx++) {
+      this.state.selectedTiles[idx].disabled = false;
+    }
+    this.state.selectedTiles = [];
 
     //TODO - how to show feedback if word was invalid? (valid words will show up on right)
+    //  post to server
     console.log('Grab!');
   },
 
@@ -36,11 +43,12 @@ Board = React.createClass({
 
     // Disable the tile
     event.target.disabled = true;
-
-    debugger;
-    //TODO - toggle tile
+    // Store the event references to these targets to enable them in future
+    this.state.selectedTiles.push(event.target);
+    
+    //TODO - toggle tile -- Complete
     // Take care to use tileInds(key) (since letters could repeat)
-    //TODO - add/remove from CurrentSelection (State?)
+    //TODO - add/remove from CurrentSelection (State?) -- Complete
   },
 
   render() {
@@ -59,9 +67,8 @@ Board = React.createClass({
         row.push(<Tile
             key      = {tileInd}
             alphabet = {tileAlphabet}
-            enabled  = {this.state.enableTiles}
+            enabled  = {true}
             onClick  = {this.tileClicked}
-            className = 'tile'
             />);
       }
       rows.push(<LineBreak key={hInd}/>);
@@ -112,7 +119,7 @@ GrabButton = React.createClass({
 
 
 CurrentSelection = React.createClass({
-  // TODO - use Tile(s) with enabled={false}
+  // TODO - use Tile(s) with enabled={false} -- Completed this one using different approach
   render(){
     return(
       <div className="CurrentSelection">
@@ -121,7 +128,3 @@ CurrentSelection = React.createClass({
     )
   }
 });
-
-
-//<CurrentSelection selcetedWord={this.state.selectedWord}/>
-
