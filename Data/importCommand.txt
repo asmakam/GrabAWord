@@ -1,0 +1,16 @@
+Here are the commands to import the dictionary
+
+1)Start the Meteor app
+2) From a separate terminal, navigate to the app folder and run meteor mongo (This should connect to the database)
+3) Create another new terminal and navigate to the Data folder and then run this command:
+mongoimport -h localhost:3001 --db meteor --collection words --type csv --file words.csv --headerline
+
+* You might have to install mongod tools from mongodb website
+
+4) From the meteor mongo Terminal, run:
+
+db.words.ensureIndex({key:1})
+
+5) Then test with this:
+
+db.words.find({key:"BEARDS"})
