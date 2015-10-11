@@ -20,6 +20,7 @@ Board = React.createClass({
 
   tileClicked(event){
     //TODO - toggle tile
+    // Take care to use tileInds(key) (since letters could repeat)
     //TODO - add/remove from CurrentSelection (State?)
   },
 
@@ -65,7 +66,7 @@ Tile = React.createClass({
 
 
 LineBreak = React.createClass({
-  //TODO - this causes 
+  //TODO - this causes 9
   // Warning: Each child in an array or iterator should have a unique "key" prop.
   render(){
     return <br></br>
