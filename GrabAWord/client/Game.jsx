@@ -15,7 +15,7 @@ Game = React.createClass({
     }
 
     if(thandle.ready()) {
-      ticker = MyTimer.findOne();
+      ticker = GameTimer.findOne();
     }
 
     return {

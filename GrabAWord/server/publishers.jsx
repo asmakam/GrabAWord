@@ -7,6 +7,6 @@ Meteor.publish('wordsByUserInBoard', (boardId,userId) => {
 });
 
 Meteor.publish('timerInfo', () => {
-	return MyTimer.find();
+	return GameTimer.find();
 });
 

@@ -12,13 +12,11 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
 
-  // Initialize timer
-  MyTimer.remove({});
-  MyTimer.insert({showBoard: true, tickCount: 0});
-
-  Meteor.setInterval(ticker, 1000);
-
   Meteor.startup(function() {
+    GameTimer.remove({});
+    GameTimer.insert({showBoard: true, tickCount: 0});
+    Meteor.setInterval(ticker, 1000);
+
     if (Boards.find().count() === 0) {
       Meteor.call('createBoard');
     }
@@ -30,20 +28,19 @@ if (Meteor.isServer) {
 
 function ticker() {
 
-  tickCount = MyTimer.findOne().tickCount + 1;
- if(tickCount < 60) {
-    isShow = true;     
-  } else if (tickCount < 90) {
-    isShow = false;
-  } else {
-    Meteor.call('createBoard');
-    tickCount = 0;
-    isShow = true;
+  let timerObj = GameTimer.findOne();
+  timerObj.tickCount++;
+
+  if(timerObj.tickCount < 10) {
+      timerObj.showBoard = true;
+    } else if (timerObj.tickCount < 15) {
+      timerObj.showBoard = false;
+    } else {
+      // New game
+      Meteor.call('createBoard');
+      timerObj.tickCount = 0;
+      timerObj.showBoard = true;
   }
 
-  MyTimer.remove({});  
-  MyTimer.insert({
-      showBoard: isShow, 
-      tickCount: tickCount, 
-  }); 
+  GameTimer.update({_id:timerObj._id}, timerObj);
 }

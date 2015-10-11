@@ -11,7 +11,6 @@ Meteor.methods({
 	// Someone grabs a words
 	grabWord(word, board, user) {
 		//If the word is walid,
-		console.log(word);
 		if (Words.findOne({key: word })) {
 			// Is the word in BoardWords
 			if (!BoardWords.findOne({boardId:board, word: word})) {

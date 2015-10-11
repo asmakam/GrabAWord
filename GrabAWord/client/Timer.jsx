@@ -1,20 +1,17 @@
 Timer = React.createClass({
-  
+
   mixins: [ReactMeteorData],
 
-  propTypes: {
-    ticker: React.PropTypes.object.isRequired
-  },
 
   getMeteorData() {
     var handle = Meteor.subscribe('timerInfo');
     var ticker = {};
-    ticker = MyTimer.findOne();
+    ticker = GameTimer.findOne();
     return {
       ticker:ticker
     };
   },
-  
+
   render() {
     if (!this.data.ticker) {
       return (<div><label> -- </label></div>);
@@ -23,9 +20,9 @@ Timer = React.createClass({
 
    return (
      <div>
-        <label> {60 - this.data.ticker.tickCount} </label>
+        <label> {this.data.ticker.tickCount} </label>
       </div>
    );
-  }  
+  }
 
 });
