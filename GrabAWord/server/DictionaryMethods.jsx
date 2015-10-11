@@ -4,22 +4,28 @@ Meteor.methods({
   // Each tile has 2 properties - letter and value
   // Cant use takes too much memory
   allWordsInGame: function(letters) {
-    
+
     let wordsArray = tree(letters.split('')).map(function(str) {
       return str.join('')
     });
-    
+
     // Find all the words in the dictionary
-    let gameDict = Words.find({key: {$in: wordsArray}}).count();
+    let gameDict = Words.find({
+      key: {
+        $in: wordsArray
+      }
+    }).count();
     return gameDict;
 
   },
 
   isWordPresent: function(word) {
-  	if (Words.findOne({key:word})) {
-  		return true;
-  	}
-  	return false;
+    if (Words.findOne({
+        key: word
+      })) {
+      return true;
+    }
+    return false;
   }
 
 });
