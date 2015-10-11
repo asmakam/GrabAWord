@@ -2,7 +2,9 @@ Board = React.createClass({
     mixins: [ReactMeteorData],
 
     getMeteorData() {
+      var loggedIn = Meteor.user();
       return {
+          loggedIn: loggedIn,
           width: 4,
           height: 5,
           letters: ['A','B','C','D','E',
@@ -16,6 +18,7 @@ Board = React.createClass({
   grabSelectedWord(){
     //TODO - clear selection, post to server
     //TODO - how to show feedback if word was invalid? (valid words will show up on right)
+    console.log('Grab!');
   },
 
   tileClicked(event){
@@ -48,7 +51,7 @@ Board = React.createClass({
         <CurrentSelection/>
         {rows}
         <br></br>
-        <button onClick={this.grabSelectedWord()}>Grab!</button>
+        <GrabButton enabled={this.data.loggedIn} onClick={this.grabSelectedWord()}/>
     	</div>
     );
   }
@@ -70,6 +73,16 @@ LineBreak = React.createClass({
   // Warning: Each child in an array or iterator should have a unique "key" prop.
   render(){
     return <br></br>
+  }
+});
+
+
+GrabButton = React.createClass({
+  render(){
+    if(this.props.enabled)
+      return <button onClick={this.props.onClick}>Grab!</button>
+    else
+      return<button disabled>Grab!</button>
   }
 });
 
