@@ -6,7 +6,7 @@ Board = React.createClass({
       selectedWord: '',
       selectedTiles: [],
       showGrabIndicator: false,
-      grabIndicatorState: false
+      grabIndicatorState: 'waiting'
     };
   },
 
@@ -23,16 +23,19 @@ Board = React.createClass({
   },
 
   grabSelectedWord(event) {
-    //TODO - clear selection -- Complete
-
-    // --> Grab the word
+      // --> Grab the word
+      this.setState({ showGrabIndicator: true});
+      this.setState({ grabIndicatorState: 'waiting'});
       Meteor.call('grabWord', this.state.selectedWord, this.data.board._id,
         this.data.userId, (err, res) => {
-        this.state.showGrabIndicator = true;
-        this.state.grabIndicatorState = res;
+        if(res){
+          this.setState({ grabIndicatorState: 'sucess'});
+        }else{
+          this.setState({ grabIndicatorState: 'fail'});
+        }
       });
 
-    // Clear display label and reenable tiles for clicking 
+    // Clear display label and reenable tiles for clicking
     this.state.selectedWord = '';
     React.findDOMNode(this.refs.textInput).innerHTML = this.state.selectedWord;
 
@@ -44,8 +47,6 @@ Board = React.createClass({
 
     //TODO - how to show feedback if word was invalid? (valid words will show up on right)
     //  post to server
-
-
   },
 
   tileClicked(event) {
@@ -61,12 +62,8 @@ Board = React.createClass({
     // Disable the GrabIndicator state, now that the user is on another word
     // TODO - enabling/disabling should be on a timer
     if (this.state.showGrabIndicator) {
-      this.state.showGrabIndicator = false;
+      this.setState({ showGrabIndicator: false});
     }
-
-    //TODO - toggle tile -- Complete
-    // Take care to use tileInds(key) (since letters could repeat)
-    //TODO - add/remove from CurrentSelection (State?) -- Complete
   },
 
   render() {
@@ -106,10 +103,10 @@ Board = React.createClass({
         <br></br>
         <span>
           <GrabButton enabled={this.data.user} onClick={this.grabSelectedWord}/>
-          <GrabIndicator smile={this.state.grabIndicatorState} /> 
+          <GrabIndicator state={this.state.grabIndicatorState} />
         </span>
         <WordList boardId={boardId} userId={userId} />
-       
+
       </div>
     );
   }
@@ -145,17 +142,5 @@ GrabButton = React.createClass({
       return <button onClick={this.props.onClick}>Grab!</button>
     else
       return <button disabled > Grab! < /button>
-  }
-});
-
-
-CurrentSelection = React.createClass({
-  // TODO - use Tile(s) with enabled={false} -- Completed this one using different approach
-  render() {
-    return (
-      <div className="CurrentSelection">
-          <label> Hello + {this.props.selectedWord} </label>
-      </div>
-    )
   }
 });
