@@ -19,12 +19,17 @@ Board = React.createClass({
     },
 
   grabSelectedWord(event){
-    //TODO - clear selection -- Complete
 
-    // Clear display label and reenable tiles for clicking 
+    // TODO - call server method
+    // 	grabWord(word, board, user)
+    let boardId = (this.data.board) ? this.data.board._id: "";
+    let userId = (this.data.user) ? this.data.userId: "";
+    Meteor.call('grabWord',this.state.selectedWord, boardId, userId);
+
+    // Clear display label and reenable tiles for clicking
     this.state.selectedWord = '';
     React.findDOMNode(this.refs.textInput).innerHTML = this.state.selectedWord;
-    
+
     // Re enable tiles and initialize to pick next word
     for(var idx = 0; idx < this.state.selectedTiles.length; idx++) {
       this.state.selectedTiles[idx].disabled = false;
@@ -33,11 +38,9 @@ Board = React.createClass({
 
     //TODO - how to show feedback if word was invalid? (valid words will show up on right)
     //  post to server
-    console.log('Grab!');
   },
 
   tileClicked(event){
-
     this.state.selectedWord = this.state.selectedWord + event.target.innerHTML;
     React.findDOMNode(this.refs.textInput).innerHTML = this.state.selectedWord;
 
@@ -45,10 +48,8 @@ Board = React.createClass({
     event.target.disabled = true;
     // Store the event references to these targets to enable them in future
     this.state.selectedTiles.push(event.target);
-    
-    //TODO - toggle tile -- Complete
+
     // Take care to use tileInds(key) (since letters could repeat)
-    //TODO - add/remove from CurrentSelection (State?) -- Complete
   },
 
   render() {
@@ -75,8 +76,10 @@ Board = React.createClass({
       rows.push(row);
     }
     rows.push(<LineBreak key="end"/>);
+
     let boardId = (this.data.board) ? this.data.board._id: "";
     let userId = (this.data.user) ? this.data.userId: "";
+
     return (
       <div className="boardContainer">
         <label ref="textInput"> </label> <br> </br>
@@ -114,17 +117,5 @@ GrabButton = React.createClass({
       return <button onClick={this.props.onClick}>Grab!</button>
     else
       return<button disabled>Grab!</button>
-  }
-});
-
-
-CurrentSelection = React.createClass({
-  // TODO - use Tile(s) with enabled={false} -- Completed this one using different approach
-  render(){
-    return(
-      <div className="CurrentSelection">
-          <label> Hello + {this.props.selectedWord} </label>
-      </div>
-    )
   }
 });

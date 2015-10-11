@@ -1,5 +1,5 @@
 Meteor.methods({
-	
+
 	// Function creates the Board and returns the id
 	createBoard() {
 		// Need to create random tiles 4 x 5
@@ -11,6 +11,7 @@ Meteor.methods({
 	// Someone grabs a words
 	grabWord(word, board, user) {
 		//If the word is walid,
+		console.log(word);
 		if (Words.findOne({key: word })) {
 			// Is the word in BoardWords
 			if (!BoardWords.findOne({boardId:board, word: word})) {
@@ -67,7 +68,8 @@ Meteor.methods({
 var createTiles = function() {
 	const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	let text = "";
-	for( var i=0; i < 20; i++ )
+	for( var i=0; i < 20; i++ ) // TODO use constants for board size
+				//TODO - use char probability
         text += possible.charAt(Math.floor(Math.random() * possible.length));
 
     return text;
