@@ -5,3 +5,8 @@ Meteor.publish('latestBoard', () => {
 Meteor.publish('wordsByUserInBoard', (boardId,userId) => {
 	return BoardWords.find({boardId: boardId, user: userId});
 });
+
+Meteor.publish('timerInfo', () => {
+	return MyTimer.find();
+});
+

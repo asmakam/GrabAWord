@@ -18,7 +18,8 @@ Board = React.createClass({
       width: 4,
       height: 5,
       board: Boards.findOne(),
-      userId: Meteor.userId()
+      userId: Meteor.userId(),
+
     };
   },
 

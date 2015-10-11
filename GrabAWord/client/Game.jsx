@@ -14,6 +14,8 @@ Game = React.createClass({
 
         <AccountsUIWrapper />
 
+        <Timer />
+
         <Board />
 
     	</div>
