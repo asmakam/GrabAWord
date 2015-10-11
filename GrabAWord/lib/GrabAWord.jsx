@@ -27,9 +27,6 @@ if (Meteor.isServer) {
 }
 
 
-var tickCount = 0;
-
-
 function ticker() {
 
   tickCount = MyTimer.findOne().tickCount + 1;
@@ -39,7 +36,7 @@ function ticker() {
       showBoard: true, 
       tickCount: count
     }); 
-    */ 
+  */ 
   
   if(tickCount < 60) {
     isShow = true;     
