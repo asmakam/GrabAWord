@@ -5,8 +5,7 @@ Board = React.createClass({
     return {
       selectedWord: '',
       selectedTiles: [],
-      showGrabIndicator: false,
-      grabIndicatorState: 'waiting'
+      grabbedWordStatus: 'na'
     };
   },
 
@@ -25,15 +24,18 @@ Board = React.createClass({
 
   grabSelectedWord(event) {
       // --> Grab the word
-      this.setState({ showGrabIndicator: true});
-      this.setState({ grabIndicatorState: 'waiting'});
+      this.setState({ grabbedWordStatus: 'waiting'});
       Meteor.call('grabWord', this.state.selectedWord, this.data.board._id,
         this.data.userId, (err, res) => {
         if(res){
-          this.setState({ grabIndicatorState: 'success'});
+          this.setState({ grabbedWordStatus: 'success'});
         }else{
-          this.setState({ grabIndicatorState: 'fail'});
+          this.setState({ grabbedWordStatus: 'fail'});
         }
+        let resetGrabIndicator = function(){
+          this.setState({ grabbedWordStatus: 'na'});
+        }.bind(this);
+        Meteor.setTimeout(resetGrabIndicator,1000); //mseconds
       });
 
     // Clear display label and reenable tiles for clicking
@@ -59,12 +61,6 @@ Board = React.createClass({
     event.target.disabled = true;
     // Store the event references to these targets to enable them in future
     this.state.selectedTiles.push(event.target);
-
-    // Disable the GrabIndicator state, now that the user is on another word
-    // TODO - enabling/disabling should be on a timer
-    if (this.state.showGrabIndicator) {
-      this.setState({ showGrabIndicator: false});
-    }
   },
 
   render() {
@@ -104,7 +100,7 @@ Board = React.createClass({
         <br></br>
         <span>
           <GrabButton enabled={this.data.user} onClick={this.grabSelectedWord}/>
-          <GrabIndicator state={this.state.grabIndicatorState} />
+          <GrabIndicator state={this.state.grabbedWordStatus} />
         </span>
         <WordList boardId={boardId} userId={userId} />
 

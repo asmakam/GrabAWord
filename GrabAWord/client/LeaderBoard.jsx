@@ -1,21 +1,17 @@
 LeaderBoard = React.createClass({
-  
-  mixins: [ReactMeteorData],
 
-  propTypes: {
-    
-  },
+  mixins: [ReactMeteorData],
 
   getMeteorData() {
     return { };
   },
-  
+
   render() {
     return (
       <div>
         <label> Leader board information </label>
       </div>
       );
-  }  
+  }
 
 });
