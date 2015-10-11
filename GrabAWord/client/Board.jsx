@@ -108,9 +108,17 @@ Board = React.createClass({
 
 Tile = React.createClass({
   render() {
+    var btnStyle = {
+      height: 60,
+      border: ['1px outset white'],
+      backgroundColor: 'transparent',
+      fontSize: '3em'
+    };
+
     if (this.props.enabled) //For board
       return(
-      <button key = {this.props.key} onClick={this.props.onClick}>{this.props.alphabet}</button>);
+        <button style={btnStyle} className="col-xs-3" key={this.props.key} onClick={this.props.onClick}>{this.props.alphabet}</button>
+      );
     else // To show current selection
       return (<button key = {
       this.props.key
