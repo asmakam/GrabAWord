@@ -1,12 +1,12 @@
 Game = React.createClass({
   /*
-     Uncomment when needed
+    // Uncomment when needed
     mixins: [ReactMeteorData],
 
     getMeteorData() {
 
     },
-  */
+   */
 
   render() {
     return (

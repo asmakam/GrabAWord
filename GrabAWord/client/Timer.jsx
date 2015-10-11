@@ -1,37 +1,33 @@
 Timer = React.createClass({
+  
   mixins: [ReactMeteorData],
 
   propTypes: {
     ticker: React.PropTypes.object.isRequired
   },
 
-  getInitialState() {
-    return {}
-  },
-
   getMeteorData() {
     var handle = Meteor.subscribe('timerInfo');
     var ticker = {};
     if(handle.ready()) {
-      tickCount = MyTimer.findOne().tickCount;
+      arr = MyTimer.find().fetch();
+      ticker = arr[0];
+      //debugger;
+      console.log(ticker);
     }
     return ticker;
   },
   
   render() {
-
     if (!this.data.ticker) {
-      //return <LoadingSpinner />;
       return <div> Timer loading .... </div>
     }
 
     return (
       <div>
-        <label> {this.data.tickCount} </label>
+        <label> {this.data.ticker.tickCount} </label>
       </div>
       );
   }  
 
 });
-
-//

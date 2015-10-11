@@ -31,18 +31,29 @@ var tickCount = 0;
 
 
 function ticker() {
-  tickCount = tickCount + 1;
-    
-  current = MyTimer.findOne();
-    
-  MyTimer.update(MyTimer.findOne()._id, {
+
+  tickCount = MyTimer.findOne().tickCount + 1;
+
+  /*
+  MyTimer.insert(MyTimer.findOne()._id, {
       showBoard: true, 
-      tickCount: current.tickCount + 1
-    });  
-
-  if(tickCount < 61) {
-    
+      tickCount: count
+    }); 
+    */ 
+  
+  if(tickCount < 60) {
+    isShow = true;     
+  } else if (tickCount < 90) {
+    isShow = false;
   } else {
-
+    Meteor.call('createBoard');
+    tickCount = 0;
+    isShow = true;
   }
+
+  MyTimer.remove({});  
+  MyTimer.insert({
+      showBoard: isShow, 
+      tickCount: tickCount, 
+  }); 
 }
