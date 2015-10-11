@@ -30,13 +30,6 @@ if (Meteor.isServer) {
 function ticker() {
 
   tickCount = MyTimer.findOne().tickCount + 1;
-
-  /*
-  MyTimer.insert(MyTimer.findOne()._id, {
-      showBoard: true, 
-      tickCount: count
-    }); 
-  */ 
   
   if(tickCount < 60) {
     isShow = true;     
