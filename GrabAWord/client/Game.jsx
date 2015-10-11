@@ -26,11 +26,12 @@ Game = React.createClass({
     },
 
   render() {
+
     return (
       <div className="content">
 
         <NavBar />
-                
+
         <div className="container">
           <div className="row">
             <div className="col-md-8 col-sm-12 col-md-offset-2">

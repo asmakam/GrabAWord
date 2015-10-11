@@ -3,7 +3,7 @@ NavBar = React.createClass({
     var divStyle = {
       color: 'white'
     };
-    
+
     return (
       <div style={divStyle} className="navbar navbar-inverse">
         <div className="navbar-inner">
