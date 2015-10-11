@@ -13,6 +13,16 @@ Board = React.createClass({
       };
     },
 
+  grabSelectedWord(){
+    //TODO - clear selection, post to server
+    //TODO - how to show feedback if word was invalid? (valid words will show up on right)
+  },
+
+  tileClicked(event){
+    //TODO - toggle tile
+    //TODO - add/remove from CurrentSelection (State?)
+  },
+
   render() {
     var rows = [];
     for(var hInd=0; hInd<this.data.height; hInd++){
@@ -20,7 +30,12 @@ Board = React.createClass({
       for(var wInd=0; wInd<this.data.width; wInd++){
         var tileInd = hInd*this.data.height+wInd; // row major
         var tileAlphabet = this.data.letters[tileInd];
-        row.push(<Tile alphabet={tileAlphabet}/>);
+        row.push(<Tile
+            key      = {tileInd}
+            alphabet = {tileAlphabet}
+            enabled  = {true}
+            onClick  = {this.tileClicked}
+            />);
       }
       rows.push(<LineBreak/>);
       rows.push(row);
@@ -29,10 +44,10 @@ Board = React.createClass({
 
     return (
       <div className="boardContainer">
-        <p>[Currently selected tiles/word go here] (x -clear button to remove all selection)</p>
+        <CurrentSelection/>
         {rows}
         <br></br>
-        <button>Grab!</button>
+        <button onClick={this.grabSelectedWord()}>Grab!</button>
     	</div>
     );
   }
@@ -41,13 +56,30 @@ Board = React.createClass({
 
 Tile = React.createClass({
     render(){
-      return <button>{this.props.alphabet}</button>
+      if(this.props.enabled) //For board
+        return <button key = {this.props.key} onClick={this.props.onClick}>{this.props.alphabet}</button>
+      else // To show current selection
+        return <button key = {this.props.key} disabled>{this.props.alphabet}</button>
     }
 });
 
 
 LineBreak = React.createClass({
+  //TODO - this causes 
+  // Warning: Each child in an array or iterator should have a unique "key" prop.
   render(){
     return <br></br>
+  }
+});
+
+
+CurrentSelection = React.createClass({
+  // TODO - use Tile(s) with enabled={false}
+  render(){
+    return(
+      <div className="CurrentSelection">
+
+      </div>
+    )
   }
 });
