@@ -8,7 +8,8 @@ Board = React.createClass({
           user: user,
           width: 4,
           height: 5,
-          board: Boards.findOne()
+          board: Boards.findOne(),
+          userId: Meteor.userId()
       };
     },
 
@@ -48,14 +49,17 @@ Board = React.createClass({
       rows.push(row);
     }
     rows.push(<LineBreak key="end"/>);
-
+    let boardId = (this.data.board) ? this.data.board._id: "";
+    let userId = (this.data.user) ? this.data.userId: "";
     return (
       <div className="boardContainer">
         <CurrentSelection/>
         {rows}
         <br></br>
         <GrabButton enabled={this.data.user} onClick={this.grabSelectedWord}/>
+        <WordList boardId={boardId} userId={userId} />
     	</div>
+
     );
   }
 });

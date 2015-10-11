@@ -1,5 +1,5 @@
 if (Meteor.isClient) {
-  
+
   Accounts.ui.config({
     passwordSignupFields: "USERNAME_ONLY"
   });
@@ -11,9 +11,9 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
 
-	Meteor.startup(function() {
-		if (Boards.find().count() === 0) {
-			Meteor.call('createBoard');
-		}
-	});
+  Meteor.startup(function() {
+    if (Boards.find().count() === 0) {
+      Meteor.call('createBoard');
+    }
+  });
 }
