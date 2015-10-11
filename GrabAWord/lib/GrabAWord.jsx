@@ -11,7 +11,6 @@ if (Meteor.isClient) {
 
 
 if (Meteor.isServer) {
-
   Meteor.startup(function() {
     GameTimer.remove({});
     GameTimer.insert({showBoard: true, tickCount: 0});
@@ -21,19 +20,21 @@ if (Meteor.isServer) {
       Meteor.call('createBoard');
     }
   });
-
 }
 
-
+const GAMETIME = 10; // seconds
+const LEADERBOARDTIME = 5; //seconds
 
 function ticker() {
 
   let timerObj = GameTimer.findOne();
   timerObj.tickCount++;
 
-  if(timerObj.tickCount < 10) {
+  if(timerObj.tickCount < GAMETIME) {
+      // Game play
       timerObj.showBoard = true;
-    } else if (timerObj.tickCount < 15) {
+    } else if (timerObj.tickCount < GAMETIME+LEADERBOARDTIME) {
+      // Leader board
       timerObj.showBoard = false;
     } else {
       // New game
