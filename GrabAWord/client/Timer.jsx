@@ -23,7 +23,7 @@ Timer = React.createClass({
         // Game play
         return (
            <div>
-            <label> {this.data.ticker.tickCount} </label>
+            <label> {GAMETIME - this.data.ticker.tickCount} </label>
           </div>
         )
       }else{
