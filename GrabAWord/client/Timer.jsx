@@ -15,7 +15,9 @@ Timer = React.createClass({
       //debugger;
       console.log(ticker);
     }
-    return ticker;
+    return {
+      ticker:ticker
+    };
   },
   
   render() {
