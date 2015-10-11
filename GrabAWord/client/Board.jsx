@@ -2,7 +2,8 @@ Board = React.createClass({
     mixins: [ReactMeteorData],
 
     getInitialState() {
-      return { selectedWord: ''};
+      return { selectedWord: '',
+               enableTiles: true};
     },
 
     getMeteorData() {
@@ -20,6 +21,8 @@ Board = React.createClass({
     //TODO - clear selection, post to server
     this.state.selectedWord = '';
     React.findDOMNode(this.refs.textInput).innerHTML = this.state.selectedWord;
+    
+    this.state.enableTiles = true;
 
     //TODO - how to show feedback if word was invalid? (valid words will show up on right)
     console.log('Grab!');
@@ -30,6 +33,10 @@ Board = React.createClass({
     this.state.selectedWord = this.state.selectedWord + event.target.innerHTML;
     React.findDOMNode(this.refs.textInput).innerHTML = this.state.selectedWord;
 
+    // Disable the tile
+    event.target.disabled = true;
+
+    debugger;
     //TODO - toggle tile
     // Take care to use tileInds(key) (since letters could repeat)
     //TODO - add/remove from CurrentSelection (State?)
@@ -51,8 +58,9 @@ Board = React.createClass({
         row.push(<Tile
             key      = {tileInd}
             alphabet = {tileAlphabet}
-            enabled  = {true}
+            enabled  = {this.state.enableTiles}
             onClick  = {this.tileClicked}
+            className = 'tile'
             />);
       }
       rows.push(<LineBreak key={hInd}/>);
