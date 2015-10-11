@@ -9,12 +9,7 @@ Timer = React.createClass({
   getMeteorData() {
     var handle = Meteor.subscribe('timerInfo');
     var ticker = {};
-    if(handle.ready()) {
-      arr = MyTimer.find().fetch();
-      ticker = arr[0];
-      //debugger;
-      console.log(ticker);
-    }
+    ticker = MyTimer.findOne();
     return {
       ticker:ticker
     };
@@ -22,14 +17,15 @@ Timer = React.createClass({
   
   render() {
     if (!this.data.ticker) {
-      return <div> Timer loading .... </div>
+      return (<div><label> -- </label></div>);
     }
 
-    return (
-      <div>
-        <label> {this.data.ticker.tickCount} </label>
+
+   return (
+     <div>
+        <label> {60 - this.data.ticker.tickCount} </label>
       </div>
-      );
+   );
   }  
 
 });

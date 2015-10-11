@@ -27,17 +27,11 @@ if (Meteor.isServer) {
 }
 
 
+
 function ticker() {
 
   tickCount = MyTimer.findOne().tickCount + 1;
 
-  /*
-  MyTimer.insert(MyTimer.findOne()._id, {
-      showBoard: true, 
-      tickCount: count
-    }); 
-  */ 
-  
   if(tickCount < 60) {
     isShow = true;     
   } else if (tickCount < 90) {
@@ -45,6 +39,7 @@ function ticker() {
   } else {
     Meteor.call('createBoard');
     tickCount = 0;
+    global_timer = 0;
     isShow = true;
   }
 

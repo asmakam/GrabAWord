@@ -30,7 +30,7 @@ Board = React.createClass({
       Meteor.call('grabWord', this.state.selectedWord, this.data.board._id,
         this.data.userId, (err, res) => {
         if(res){
-          this.setState({ grabIndicatorState: 'sucess'});
+          this.setState({ grabIndicatorState: 'success'});
         }else{
           this.setState({ grabIndicatorState: 'fail'});
         }
