@@ -1,5 +1,5 @@
 Game = React.createClass({
-  
+
     // Uncomment when needed
     mixins: [ReactMeteorData],
 
@@ -27,15 +27,22 @@ Game = React.createClass({
 
   render() {
     return (
-      <div className="container">
+      <div className="content">
 
-        <AccountsUIWrapper />
-        
-        <Timer />
+        <NavBar />
+                
+        <div className="container">
+          <div className="row">
+            <div className="col-md-8 col-sm-12 col-md-offset-2">
+              <AccountsUIWrapper />
 
-        {this.data.ticker.showBoard ? <Board /> : <LeaderBoard />}
+              <Timer />
 
-    	</div>
+              {this.data.ticker.showBoard ? <Board /> : <LeaderBoard />}
+            </div>
+          </div>
+        </div>
+      </div>
     );
   }
 });
