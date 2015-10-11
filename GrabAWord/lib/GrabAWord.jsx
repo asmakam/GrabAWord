@@ -31,19 +31,13 @@ if (Meteor.isServer) {
 function ticker() {
 
   tickCount = MyTimer.findOne().tickCount + 1;
-<<<<<<< .merge_file_MifY3V
-
-=======
-  
->>>>>>> .merge_file_mk2TBR
-  if(tickCount < 60) {
+ if(tickCount < 60) {
     isShow = true;     
   } else if (tickCount < 90) {
     isShow = false;
   } else {
     Meteor.call('createBoard');
     tickCount = 0;
-    global_timer = 0;
     isShow = true;
   }
 
