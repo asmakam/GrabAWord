@@ -15,8 +15,8 @@ Timer = React.createClass({
   render() {
 
     //TODO - how to have global constants? (see in GrabAWord.jsx)
-    const GAMETIME = 10; // seconds
-    const LEADERBOARDTIME = 5; //seconds
+    const GAMETIME = 60; // seconds
+    const LEADERBOARDTIME = 15; //seconds
 
     if(this.data.ticker){
       if(this.data.ticker.showBoard){

@@ -27,15 +27,11 @@ Board = React.createClass({
       this.setState({ grabbedWordStatus: 'waiting'});
       Meteor.call('grabWord', this.state.selectedWord, this.data.board._id,
         this.data.userId, (err, res) => {
-        if(res){
-          this.setState({ grabbedWordStatus: 'success'});
-        }else{
-          this.setState({ grabbedWordStatus: 'fail'});
-        }
-        let resetGrabIndicator = function(){
+          this.setState({ grabbedWordStatus: res});
+          let resetGrabIndicator = function(){
           this.setState({ grabbedWordStatus: 'na'});
-        }.bind(this);
-        Meteor.setTimeout(resetGrabIndicator,1000); //mseconds
+          }.bind(this);
+          Meteor.setTimeout(resetGrabIndicator,1000); //mseconds
       });
 
     // Clear display label and reenable tiles for clicking

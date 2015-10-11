@@ -22,8 +22,8 @@ if (Meteor.isServer) {
   });
 }
 
-const GAMETIME = 10; // seconds
-const LEADERBOARDTIME = 5; //seconds
+const GAMETIME = 60; // seconds
+const LEADERBOARDTIME = 15; //seconds
 
 function ticker() {
 

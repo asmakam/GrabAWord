@@ -17,9 +17,13 @@ GrabIndicator = React.createClass({
         // successfully accepted by server
         return <div><p> :) </p></div>
         break;
-      case "fail":
-        // rejected by server
+      case "beaten":
+        // someone else beat you to it
         return <div><p> :( </p></div>
+        break;
+      case "incorrect":
+        // incorrect word made
+        return <div><p>x</p></div>
         break;
 
 

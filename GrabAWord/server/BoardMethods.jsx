@@ -19,10 +19,14 @@ Meteor.methods({
 				Meteor.defer(() => {
 					Meteor.call('updateWordsWithPoints',bwId, word);
 				});
-				return true;
+				return 'success';
+			}else{
+				return 'beaten';
 			}
+		} else{
+				return 'incorrect';
 		}
-		return false;
+
 	},
 
 	updateWordsWithPoints(wordId, word) {
