@@ -8,3 +8,12 @@ if (Meteor.isClient) {
     React.render( < Game / > , document.getElementById("mainBody"));
   });
 }
+
+if (Meteor.isServer) {
+
+	Meteor.startup(function() {
+		if (Boards.find().count() === 0) {
+			Meteor.call('createBoard');
+		}
+	});
+}

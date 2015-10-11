@@ -6,8 +6,6 @@ Board = React.createClass({
       var handle = Meteor.subscribe('latestBoard');
       return {
           user: user,
-
-          // TODO - replace with server call/collection with active board
           width: 4,
           height: 5,
           board: Boards.findOne()
@@ -21,10 +19,8 @@ Board = React.createClass({
   },
 
   tileClicked(event){
-    console.log('Tile clicked:' + event.target.innerHTML );
     //TODO - toggle tile
-    // TODO - how to get the tile ind??
-    //TODO - Take care to use tileInds(key) (since letters could repeat)
+    // Take care to use tileInds(key) (since letters could repeat)
     //TODO - add/remove from CurrentSelection (State?)
   },
 
@@ -93,7 +89,7 @@ GrabButton = React.createClass({
 
 
 CurrentSelection = React.createClass({
-  // TODO - use Tile(s) with enabled={false} to show selected tiles on the top
+  // TODO - use Tile(s) with enabled={false}
   render(){
     return(
       <div className="CurrentSelection">
