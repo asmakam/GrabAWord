@@ -12,6 +12,9 @@ Game = React.createClass({
     return (
       <div className="container">
     		<p> Main Game </p>
+
+        <Board />
+        
     	</div>
     );
   }
