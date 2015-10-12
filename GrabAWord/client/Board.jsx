@@ -180,7 +180,7 @@ GrabButton = React.createClass({
     else
       return (
         <div style={divStyle} className="col-xs-12">
-          <button disabled className="btn btn-default btn-lg btn-block"> Grab! </button>
+          <button disabled className="btn btn-default btn-lg btn-block"> Log in to play! </button>
         </div>
       );
   }
