@@ -7,13 +7,11 @@ LeaderBoard = React.createClass({
   },
 
   getMeteorData() {
-    let leaderboardUsersHandle = Meteor.subscribe('leaderboardUsers', this.props.boardId);
-    let leaderboardResultsHandle = Meteor.subscribe('latestBoard');
-    let leaderboard = [];
-    let users = [];
+    var leaderboardUsersHandle = Meteor.subscribe('leaderboardUsers', this.props.boardId);
+    var leaderboardResultsHandle = Meteor.subscribe('latestBoard');
+    var leaderboard = [];
+    var users = [];
 
-   
-    
     if(leaderboardUsersHandle.ready()) {
       users = Meteor.users.find().fetch();
     }
@@ -29,14 +27,33 @@ LeaderBoard = React.createClass({
   },
 
   render() {
-    
-   
-   
-    return (
-      <div>
-        <label> Leader board information </label>
-      </div>
-    );
+
+    var leaders = [];
+
+      if ((this.data.leaderboard) && (this.data.users)) {
+        let orderedBoard = _.sortBy(this.data.leaderboard,'points').reverse();
+        // This one is ideally not necessary for some reason user data is not getting refreshed
+        this.data.users = Meteor.users.find().fetch();
+
+        orderedBoard.forEach( l => {
+          let userNameObj = _.findWhere(this.data.users,{ _id: l._id });
+          if(userNameObj) {
+            leaders.push(
+                <LeaderRow  name = {userNameObj.username}  points={l.totalPoints} />
+              ); 
+            leaders.push(<LineBreak key={userNameObj.username}/>)
+          }
+        }.bind(this));
+      }
+
+      return (
+              <div>
+                <label> Leader Board </label>
+              <div className="row">
+                {leaders}
+              </div>
+              </div>
+          );
   }
 
 });
