@@ -90,7 +90,11 @@ Board = React.createClass({
     return (
       <div className="boardContainer">
         <div className="row">
-          <label ref="textInput"> </label>
+          <div className="panel panel-default">
+            <div ref="textInput" className="panel-body">
+            </div>
+          </div>
+
         </div>
 
         <div className="row">
