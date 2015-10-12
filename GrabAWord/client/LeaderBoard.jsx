@@ -39,11 +39,12 @@ LeaderBoard = React.createClass({
 
       if (this.data.leaderboard.length && this.data.users.length) {
         let orderedBoard = _.sortBy(this.data.leaderboard,'totalPoints').reverse();
+        var rank = 1;
         orderedBoard.forEach( l => {
           let userNameObj = _.findWhere(this.data.users,{ idx: l._id });
           if(userNameObj) {
             leaders.push(
-                <LeaderRow  name = {userNameObj.username}  points={l.totalPoints} />
+                <LeaderRow  name = {userNameObj.username}  points={l.totalPoints} rank={rank++} />
               );
             leaders.push(<LineBreak key={userNameObj.username}/>)
           }
@@ -55,7 +56,7 @@ LeaderBoard = React.createClass({
               <div>
                 <div className="panel panel-warning">
                   <div className="panel-heading">
-                    <h1 className="panel-title">Leader Board</h1>
+                    <h1 className="panel-title text-center">Leader Board</h1>
                   </div>
                   <div className="panel-body">
                     <div className="col-xs-12 table-responsive">
@@ -91,7 +92,7 @@ LeaderRow = React.createClass({
 
     return(
       <tr>
-        <th scope="row">1</th>
+        <th scope="row">{this.props.rank}</th>
         <td>{this.props.name}</td>
         <td>{this.props.points} </td>
       </tr>
