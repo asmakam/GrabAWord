@@ -1,8 +1,7 @@
 NavBar = React.createClass({
   render() {
     var divStyle = {
-      color: 'white',
-      textAlign: 'center'
+      color: 'white'
     };
 
     return (
@@ -10,8 +9,14 @@ NavBar = React.createClass({
         <div className="navbar-inner">
           <div className="container">
             <div className="row">
-              <div className="col-md-6 col-md-offset-3 col-sm-12">
-                <h1>Grab A Word!</h1>
+              <div className="col-xs-3 text-center">
+                <Timer />
+              </div>
+              <div className="col-xs-6 text-center">
+                <h3>Grab A Word!</h3>
+              </div>
+              <div className="col-xs-3 text-center">
+                <AccountsUIWrapper />
               </div>
             </div>
           </div>

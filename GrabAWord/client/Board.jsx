@@ -89,14 +89,25 @@ Board = React.createClass({
     let userId = (this.data.user) ? this.data.userId : "";
     return (
       <div className="boardContainer">
-        <label ref="textInput"> </label> <br> </br>
-        {rows}
-        <br></br>
-        <span>
+        <div className="row">
+          <label ref="textInput"> </label>
+        </div>
+
+        <div className="row">
+          {rows}
+        </div>
+
+        <div className="row">
           <GrabButton enabled={this.data.user} onClick={this.grabSelectedWord}/>
+        </div>
+
+        <div className="row">
           <GrabIndicator state={this.state.grabbedWordStatus} />
-        </span>
-        <WordList boardId={boardId} userId={userId} />
+        </div>
+
+        <div className="row">
+          <WordList boardId={boardId} userId={userId} />
+        </div>
 
       </div>
     );
@@ -156,9 +167,21 @@ LineBreak = React.createClass({
 
 GrabButton = React.createClass({
   render() {
+    var divStyle = {
+      marginTop: 10
+    };
+
     if (this.props.enabled)
-      return <button onClick={this.props.onClick}>Grab!</button>
+      return (
+        <div style={divStyle} className="col-xs-12">
+          <button className="btn btn-default btn-lg btn-block" onClick={this.props.onClick}>Grab!</button>
+        </div>
+      );
     else
-      return <button disabled > Grab! < /button>
+      return (
+        <div style={divStyle} className="col-xs-12">
+          <button disabled className="btn btn-default btn-lg btn-block"> Grab! </button>
+        </div>
+      );
   }
 });

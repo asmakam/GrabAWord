@@ -23,14 +23,14 @@ Timer = React.createClass({
         // Game play
         return (
            <div>
-            <label> {GAMETIME - this.data.ticker.tickCount} </label>
+            <h2> {GAMETIME - this.data.ticker.tickCount} </h2>
           </div>
         )
       }else{
         // Leader board
         return (
            <div>
-            <label>New game in {LEADERBOARDTIME + GAMETIME - this.data.ticker.tickCount} </label>
+            <h2>{LEADERBOARDTIME + GAMETIME - this.data.ticker.tickCount} </h2>
           </div>
         )
 
