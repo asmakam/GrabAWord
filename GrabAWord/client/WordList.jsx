@@ -17,7 +17,7 @@ WordList = React.createClass({
   render() {
 
     var divStyle = {
-      paddingTop: 25
+      marginTop: 25
     };
 
   	if (!this.data.userWords) {
