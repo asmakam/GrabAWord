@@ -89,12 +89,7 @@ Board = React.createClass({
     let userId = (this.data.user) ? this.data.userId : "";
     return (
       <div className="boardContainer">
-        <div className="row">
-          <div className="panel panel-default">
-            <div ref="textInput" className="panel-body">
-            </div>
-          </div>
-
+        <div ref="textInput" className="row">
         </div>
 
         <div className="row">

@@ -16,6 +16,10 @@ WordList = React.createClass({
 
   render() {
 
+    var divStyle = {
+      paddingTop: 25
+    };
+
   	if (!this.data.userWords) {
   		return (
   			<LoadingSpinner />
@@ -24,14 +28,20 @@ WordList = React.createClass({
 
   	let words = [];
   	this.data.userWords.forEach( w => {
-  		words.push(<div>{w.word} ({w.points})</div>);
+  		words.push(<div><b>{w.word}</b>  - {w.points} points</div>);
   	});
-  	
+
   	return (
-  		<div className="wordListContainer">
-  			<div>Words</div>
-  			{words}
-  		</div>
+  		<div style={divStyle} className="wordListContainer">
+        <div className="panel panel-warning">
+          <div className="panel-heading">
+            <h3 className="panel-title">Grabbed Words</h3>
+          </div>
+          <div className="panel-body">
+            {words}
+          </div>
+        </div>
+      </div>
   	);
   }
 
