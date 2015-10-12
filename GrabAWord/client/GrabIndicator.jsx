@@ -5,8 +5,10 @@ GrabIndicator = React.createClass({
 
   render() {
     var divStyle = {
-      paddingTop: 25,
-      fontSize: '3em'
+      marginTop: 10,
+      marginBottom: 10,
+      fontSize: '3em',
+      height: 30
     };
 
     switch(this.props.state){

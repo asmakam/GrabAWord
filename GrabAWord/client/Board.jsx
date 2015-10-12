@@ -47,7 +47,7 @@ Board = React.createClass({
   },
 
   tileClicked(event, tileInstance) {
-    this.state.selectedWord = this.state.selectedWord + event.target.innerHTML;
+    this.state.selectedWord = this.state.selectedWord + tileInstance.props.alphabet;
     React.findDOMNode(this.refs.textInput).innerHTML = this.state.selectedWord;
 
     // Disable the tile
@@ -58,6 +58,10 @@ Board = React.createClass({
   },
 
   render() {
+
+    const lableStyle = {
+      height: 20
+    };
 
     if (!this.data.board) {
       return <LoadingSpinner />;
@@ -89,7 +93,7 @@ Board = React.createClass({
     let userId = (this.data.user) ? this.data.userId : "";
     return (
       <div className="boardContainer">
-        <div ref="textInput" className="row">
+        <div ref="textInput" style={lableStyle} className="row">
         </div>
 
         <div className="row">
@@ -129,28 +133,61 @@ Tile = React.createClass({
   },
 
   render() {
+
+    var LettersAndPoints = [];
+    LettersAndPoints['A'] = 1;
+    LettersAndPoints['B'] = 3;
+    LettersAndPoints['C'] = 3;
+    LettersAndPoints['D'] = 2;
+    LettersAndPoints['E'] = 1;
+    LettersAndPoints['F'] = 4;
+    LettersAndPoints['G'] = 2;
+    LettersAndPoints['H'] = 4;
+    LettersAndPoints['I'] = 1;
+    LettersAndPoints['J'] = 8;
+    LettersAndPoints['K'] = 5;
+    LettersAndPoints['L'] = 1;
+    LettersAndPoints['M'] = 3;
+    LettersAndPoints['N'] = 1;
+    LettersAndPoints['O'] = 1;
+    LettersAndPoints['P'] = 3;
+    LettersAndPoints['Q'] = 10;
+    LettersAndPoints['R'] = 1;
+    LettersAndPoints['S'] = 1;
+    LettersAndPoints['T'] = 1;
+    LettersAndPoints['U'] = 1;
+    LettersAndPoints['V'] = 4;
+    LettersAndPoints['W'] = 4;
+    LettersAndPoints['X'] = 8;
+    LettersAndPoints['Y'] = 4;
+    LettersAndPoints['Z'] = 10;
+
+    const subStyle = {
+      fontSize: '0.4em'
+    };
+
     if(this.state.enabled){
       // enabled button
       const btnStyle = {
-        height: 60,
+        height: 50,
         border: ['1px outset white'],
         backgroundColor: 'transparent',
-        fontSize: '3em'
+        fontSize: '2.2em'
       };
       return(
-            <button style={btnStyle} id={this.props.ref} className="col-xs-3" key={this.props.key} onClick={this.onThisTileClick}>{this.props.alphabet}</button>
+            <button style={btnStyle} id={this.props.ref} className="col-xs-3" key={this.props.key} onClick={this.onThisTileClick}>{this.props.alphabet} <sub style={subStyle}>{LettersAndPoints[this.props.alphabet]}</sub></button>
           );
 
     }else{
       // already selected
       const btnStyle = {
-        height: 60,
+        height: 50,
         border: ['1px outset white'],
         backgroundColor: 'white',
-        fontSize: '3em'
+        fontSize: '2.2em'
       };
       return(
-            <button style={btnStyle} id={this.props.ref} className="col-xs-3" key={this.props.key} onClick={this.onThisTileClick}>{this.props.alphabet}</button>
+            <button style={btnStyle} id={this.props.ref} className="col-xs-3" key={this.props.key} onClick={this.onThisTileClick}>{this.props.alphabet} <sub style={subStyle}>{LettersAndPoints[this.props.alphabet]}</sub></button>
           );
     }
   }
