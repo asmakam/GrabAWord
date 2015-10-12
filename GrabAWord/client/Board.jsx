@@ -144,10 +144,10 @@ Tile = React.createClass({
     }else{
       // already selected
       const btnStyle = {
-        height: 60,
+        height: 50,
         border: ['1px outset white'],
         backgroundColor: 'white',
-        fontSize: '3em'
+        fontSize: '2.5em'
       };
       return(
             <button style={btnStyle} id={this.props.ref} className="col-xs-3" key={this.props.key} onClick={this.onThisTileClick}>{this.props.alphabet}</button>
