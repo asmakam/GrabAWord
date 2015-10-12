@@ -23,20 +23,20 @@ Timer = React.createClass({
         // Game play
         return (
            <div>
-            <h2> {GAMETIME - this.data.ticker.tickCount} </h2>
+            <h3> {GAMETIME - this.data.ticker.tickCount} </h3>
           </div>
         )
       }else{
         // Leader board
         return (
            <div>
-            <h2>{LEADERBOARDTIME + GAMETIME - this.data.ticker.tickCount} </h2>
+            <h3>{LEADERBOARDTIME + GAMETIME - this.data.ticker.tickCount} </h3>
           </div>
         )
 
       }
     }
     // No timer (maybe when page is loading)
-    return (<div><label> -- </label></div>);
+    return (<div><h3> -- </h3></div>);
   }
 });
