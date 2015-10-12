@@ -4,7 +4,7 @@ Meteor.methods({
 	createBoard() {
 		// Need to create random tiles 4 x 5
 		var tiles = createTiles();
-		const board_id = Boards.insert({ createdAt: new Date(), users: [], tiles: tiles});
+		const board_id = Boards.insert({ createdAt: new Date(), results: [], tiles: tiles});
 		return board_id;
 	},
 
@@ -63,7 +63,35 @@ Meteor.methods({
 			score += LettersAndPoints[l];
 		});
 		BoardWords.update({_id:wordId}, {$set: { points: score}});
-	}
+	},
+
+	leaderboardResults() { 
+		var board = Boards.findOne({}, {
+				    sort: {
+				      createdAt: -1
+				    },
+				    limit: 1
+				  });
+		console.log(board);
+		var res =  BoardWords.aggregate([{
+		    $match: {
+		      boardId: board._id
+		    }
+		  }, {
+		    $group: {
+		      _id: '$user',
+		      totalPoints: {
+		        $sum: '$points'
+		      }
+		    }
+  		}
+  		]);
+	 if (board.results === []) {
+	 	console.log(res);
+	 	Boards.update({_id:board._id}, {$set: { results: res}});
+	 }
+
+  	}
 
 });
 

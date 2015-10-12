@@ -35,6 +35,7 @@ function ticker() {
       timerObj.showBoard = true;
     } else if (timerObj.tickCount < GAMETIME+LEADERBOARDTIME) {
       // Leader board
+      Meteor.call('leaderboardResults');
       timerObj.showBoard = false;
     } else {
       // New game
