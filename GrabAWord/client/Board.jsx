@@ -172,7 +172,7 @@ Tile = React.createClass({
         height: 50,
         border: ['1px outset white'],
         backgroundColor: 'transparent',
-        fontSize: '2.5em'
+        fontSize: '2.2em'
       };
       return(
             <button style={btnStyle} id={this.props.ref} className="col-xs-3" key={this.props.key} onClick={this.onThisTileClick}>{this.props.alphabet} <sub style={subStyle}>{LettersAndPoints[this.props.alphabet]}</sub></button>
@@ -184,7 +184,7 @@ Tile = React.createClass({
         height: 50,
         border: ['1px outset white'],
         backgroundColor: 'white',
-        fontSize: '2.5em'
+        fontSize: '2.2em'
       };
       return(
             <button style={btnStyle} id={this.props.ref} className="col-xs-3" key={this.props.key} onClick={this.onThisTileClick}>{this.props.alphabet} <sub style={subStyle}>{LettersAndPoints[this.props.alphabet]}</sub></button>
