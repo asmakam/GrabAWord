@@ -129,6 +129,35 @@ Tile = React.createClass({
   },
 
   render() {
+
+    var LettersAndPoints = [];
+    LettersAndPoints['A'] = 1;
+    LettersAndPoints['B'] = 3;
+    LettersAndPoints['C'] = 3;
+    LettersAndPoints['D'] = 2;
+    LettersAndPoints['E'] = 1;
+    LettersAndPoints['F'] = 4;
+    LettersAndPoints['G'] = 2;
+    LettersAndPoints['H'] = 4;
+    LettersAndPoints['I'] = 1;
+    LettersAndPoints['J'] = 8;
+    LettersAndPoints['K'] = 5;
+    LettersAndPoints['L'] = 1;
+    LettersAndPoints['M'] = 3;
+    LettersAndPoints['N'] = 1;
+    LettersAndPoints['O'] = 1;
+    LettersAndPoints['P'] = 3;
+    LettersAndPoints['Q'] = 10;
+    LettersAndPoints['R'] = 1;
+    LettersAndPoints['S'] = 1;
+    LettersAndPoints['T'] = 1;
+    LettersAndPoints['U'] = 1;
+    LettersAndPoints['V'] = 4;
+    LettersAndPoints['W'] = 4;
+    LettersAndPoints['X'] = 8;
+    LettersAndPoints['Y'] = 4;
+    LettersAndPoints['Z'] = 10;
+
     const subStyle = {
       fontSize: '0.4em'
     };
@@ -142,7 +171,7 @@ Tile = React.createClass({
         fontSize: '2.5em'
       };
       return(
-            <button style={btnStyle} id={this.props.ref} className="col-xs-3" key={this.props.key} onClick={this.onThisTileClick}>{this.props.alphabet} <sub style={subStyle}>2</sub></button>
+            <button style={btnStyle} id={this.props.ref} className="col-xs-3" key={this.props.key} onClick={this.onThisTileClick}>{this.props.alphabet} <sub style={subStyle}>{LettersAndPoints[this.props.alphabet]}</sub></button>
           );
 
     }else{
@@ -154,7 +183,7 @@ Tile = React.createClass({
         fontSize: '2.5em'
       };
       return(
-            <button style={btnStyle} id={this.props.ref} className="col-xs-3" key={this.props.key} onClick={this.onThisTileClick}>{this.props.alphabet} <sub style={subStyle}>2</sub></button>
+            <button style={btnStyle} id={this.props.ref} className="col-xs-3" key={this.props.key} onClick={this.onThisTileClick}>{this.props.alphabet} <sub style={subStyle}>{LettersAndPoints[this.props.alphabet]}</sub></button>
           );
     }
   }
