@@ -47,7 +47,7 @@ Board = React.createClass({
   },
 
   tileClicked(event, tileInstance) {
-    this.state.selectedWord = this.state.selectedWord + event.target.innerHTML;
+    this.state.selectedWord = this.state.selectedWord + tileInstance.props.alphabet;
     React.findDOMNode(this.refs.textInput).innerHTML = this.state.selectedWord;
 
     // Disable the tile
