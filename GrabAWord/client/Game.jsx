@@ -34,7 +34,7 @@ Game = React.createClass({
 
         <div className="container">
           <div className="row">
-            <div className="col-md-6 col-sm-12 col-md-offset-3">
+            <div className="col-md-6 col-xs-10 col-md-offset-3 col-xs-offset-1">
               {this.data.ticker.showBoard ? <Board /> : <LeaderBoard boardId = {this.data.board._id} />}
             </div>
           </div>
