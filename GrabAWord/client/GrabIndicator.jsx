@@ -4,31 +4,36 @@ GrabIndicator = React.createClass({
   },
 
   render() {
+    var divStyle = {
+      paddingTop: 25,
+      fontSize: '3em'
+    };
+
     switch(this.props.state){
       case 'na':
         // Not applicable, nothing grabbed yet
-        return <div></div>
+        return <div style={divStyle} className="indicatorContainer text-center"><p> </p></div>
         break;
       case "waiting":
         // for server response
-        return <div><p> ... </p></div>
+        return <div style={divStyle} className="indicatorContainer text-center"><p> ... </p></div>
         break;
       case "success":
         // successfully accepted by server
-        return <div><p> :) </p></div>
+        return <div style={divStyle} className="indicatorContainer text-center"><p> :) </p></div>
         break;
       case "beaten":
         // someone else beat you to it
-        return <div><p> :( </p></div>
+        return <div style={divStyle} className="indicatorContainer text-center"><p> :( </p></div>
         break;
       case "incorrect":
         // incorrect word made
-        return <div><p>x</p></div>
+        return <div style={divStyle} className="indicatorContainer text-center"><p>x</p></div>
         break;
 
 
       default:
-        return <div></div>
+        return <div style={divStyle} className="indicatorContainer text-center"><p> </p></div>
     }
   }
 });
