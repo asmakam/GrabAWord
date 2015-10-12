@@ -115,7 +115,6 @@ Meteor.methods({
       }
 
     }
-
 });
 
 

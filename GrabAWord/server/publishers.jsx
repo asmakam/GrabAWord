@@ -34,6 +34,13 @@ Meteor.publish('leaderboard', (boardId) => {
 });
 
 Meteor.publish('leaderboardUsers', (boardId) => {
-	var users = BoardWords.find({boardId:boardId}, {$fields: { user: 1}}).fetch();
-	return Meteor.users.find({_id: {$in: users}}, {$fields: { username: 1}});
+	
+  var list = Meteor.users.find().fetch();
+  
+  Players.remove({});
+  for(var idx = 0; idx < list.length; idx++) {
+    Players.insert({username: list[idx].username, idx: list[idx]._id}); 
+  }
+
+  return Players.find();
 });

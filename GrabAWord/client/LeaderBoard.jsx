@@ -12,9 +12,16 @@ LeaderBoard = React.createClass({
     var leaderboard = [];
     var users = [];
 
+    
     if(leaderboardUsersHandle.ready()) {
-      users = Meteor.users.find().fetch();
+      users = Players.find().fetch();
     }
+
+    /*
+    Meteor.call('getPlayers', (err, res) => {
+          this.data.users = res;
+        }.bind(this));
+    */
 
     if(leaderboardResultsHandle.ready()) {
       leaderboard = Boards.findOne().results;
@@ -30,13 +37,10 @@ LeaderBoard = React.createClass({
 
     var leaders = [];
 
-      if ((this.data.leaderboard) && (this.data.users)) {
-        let orderedBoard = _.sortBy(this.data.leaderboard,'points').reverse();
-        // This one is ideally not necessary for some reason user data is not getting refreshed
-        this.data.users = Meteor.users.find().fetch();
-
+      if (this.data.leaderboard.length && this.data.users.length) {
+        let orderedBoard = _.sortBy(this.data.leaderboard,'totalPoints').reverse();
         orderedBoard.forEach( l => {
-          let userNameObj = _.findWhere(this.data.users,{ _id: l._id });
+          let userNameObj = _.findWhere(this.data.users,{ idx: l._id });
           if(userNameObj) {
             leaders.push(
                 <LeaderRow  name = {userNameObj.username}  points={l.totalPoints} />
