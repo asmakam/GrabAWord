@@ -136,7 +136,7 @@ Tile = React.createClass({
       const btnStyle = {
         height: 60,
         border: ['1px outset white'],
-        backgroundColor: 'red',
+        backgroundColor: 'white',
         fontSize: '3em'
       };
       return(

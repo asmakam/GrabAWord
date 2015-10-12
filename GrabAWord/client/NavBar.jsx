@@ -1,7 +1,8 @@
 NavBar = React.createClass({
   render() {
     var divStyle = {
-      color: 'white'
+      color: 'white',
+      textAlign: 'center'
     };
 
     return (
@@ -9,7 +10,7 @@ NavBar = React.createClass({
         <div className="navbar-inner">
           <div className="container">
             <div className="row">
-              <div className="col-md-8 col-md-offset-2 col-sm-12">
+              <div className="col-md-6 col-md-offset-3 col-sm-12">
                 <h1>Grab A Word!</h1>
               </div>
             </div>
