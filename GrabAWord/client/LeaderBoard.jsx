@@ -44,18 +44,36 @@ LeaderBoard = React.createClass({
           if(userNameObj) {
             leaders.push(
                 <LeaderRow  name = {userNameObj.username}  points={l.totalPoints} />
-              ); 
+              );
             leaders.push(<LineBreak key={userNameObj.username}/>)
           }
         }.bind(this));
       }
 
       return (
+
               <div>
-                <label> Leader Board </label>
-              <div className="row">
-                {leaders}
-              </div>
+                <div className="panel panel-warning">
+                  <div className="panel-heading">
+                    <h1 className="panel-title">Leader Board</h1>
+                  </div>
+                  <div className="panel-body">
+                    <div className="col-xs-12 table-responsive">
+                      <table className="table">
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Points</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {leaders}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
               </div>
           );
   }
@@ -72,7 +90,11 @@ LeaderRow = React.createClass({
   render() {
 
     return(
-      <p> {this.props.name} --- {this.props.points} </p>
+      <tr>
+        <th scope="row">1</th>
+        <td>{this.props.name}</td>
+        <td>{this.props.points} </td>
+      </tr>
     );
 
   }
