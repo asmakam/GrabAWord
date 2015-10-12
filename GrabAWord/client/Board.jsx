@@ -129,6 +129,10 @@ Tile = React.createClass({
   },
 
   render() {
+    const subStyle = {
+      fontSize: '0.4em'
+    };
+
     if(this.state.enabled){
       // enabled button
       const btnStyle = {
@@ -138,7 +142,7 @@ Tile = React.createClass({
         fontSize: '2.5em'
       };
       return(
-            <button style={btnStyle} id={this.props.ref} className="col-xs-3" key={this.props.key} onClick={this.onThisTileClick}>{this.props.alphabet}</button>
+            <button style={btnStyle} id={this.props.ref} className="col-xs-3" key={this.props.key} onClick={this.onThisTileClick}>{this.props.alphabet} <sub style={subStyle}>2</sub></button>
           );
 
     }else{
@@ -150,7 +154,7 @@ Tile = React.createClass({
         fontSize: '2.5em'
       };
       return(
-            <button style={btnStyle} id={this.props.ref} className="col-xs-3" key={this.props.key} onClick={this.onThisTileClick}>{this.props.alphabet}</button>
+            <button style={btnStyle} id={this.props.ref} className="col-xs-3" key={this.props.key} onClick={this.onThisTileClick}>{this.props.alphabet} <sub style={subStyle}>2</sub></button>
           );
     }
   }
