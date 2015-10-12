@@ -59,6 +59,10 @@ Board = React.createClass({
 
   render() {
 
+    const lableStyle = {
+      height: 20
+    };
+
     if (!this.data.board) {
       return <LoadingSpinner />;
     }
@@ -89,7 +93,7 @@ Board = React.createClass({
     let userId = (this.data.user) ? this.data.userId : "";
     return (
       <div className="boardContainer">
-        <div ref="textInput" className="row">
+        <div ref="textInput" style={lableStyle} className="row">
         </div>
 
         <div className="row">
