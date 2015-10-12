@@ -40,23 +40,21 @@ Board = React.createClass({
 
     // Re enable tiles and initialize to pick next word
     for (var idx = 0; idx < this.state.selectedTiles.length; idx++) {
-      this.state.selectedTiles[idx].disabled = false;
+      this.state.selectedTiles[idx].state.enabled = true;
+      this.state.selectedTiles[idx].getDOMNode().disabled = false;
     }
     this.state.selectedTiles = [];
-
-    //TODO - how to show feedback if word was invalid? (valid words will show up on right)
-    //  post to server
   },
 
-  tileClicked(event) {
-
+  tileClicked(event, tileInstance) {
     this.state.selectedWord = this.state.selectedWord + event.target.innerHTML;
     React.findDOMNode(this.refs.textInput).innerHTML = this.state.selectedWord;
 
     // Disable the tile
     event.target.disabled = true;
+
     // Store the event references to these targets to enable them in future
-    this.state.selectedTiles.push(event.target);
+    this.state.selectedTiles.push(tileInstance);
   },
 
   render() {
@@ -76,10 +74,10 @@ Board = React.createClass({
         var tileAlphabet = tiles[tileInd];
         row.push(
           <Tile
-            key      = {tileInd}
-            alphabet = {tileAlphabet}
-            enabled  = {true}
-            onClick  = {this.tileClicked}
+            ref          = {"tile"+tileInd}
+            key          = {tileInd}
+            alphabet     = {tileAlphabet}
+            tileClicked  = {this.tileClicked}
             />
         );
       }
@@ -107,25 +105,44 @@ Board = React.createClass({
 
 
 Tile = React.createClass({
-  render() {
-    var btnStyle = {
-      height: 60,
-      border: ['1px outset white'],
-      backgroundColor: 'transparent',
-      fontSize: '3em'
+  getInitialState() {
+    return {
+      enabled: true,
     };
+  },
 
-    if (this.props.enabled) //For board
+  onThisTileClick(event){
+    // Post to parent
+    this.props.tileClicked(event, this);
+    // Toggle visual state
+    this.setState({enabled: !this.state.enabled});
+  },
+
+  render() {
+    if(this.state.enabled){
+      // enabled button
+      const btnStyle = {
+        height: 60,
+        border: ['1px outset white'],
+        backgroundColor: 'transparent',
+        fontSize: '3em'
+      };
       return(
-        <button style={btnStyle} className="col-xs-3" key={this.props.key} onClick={this.props.onClick}>{this.props.alphabet}</button>
-      );
-    else // To show current selection
-      return (<button key = {
-      this.props.key
+            <button style={btnStyle} id={this.props.ref} className="col-xs-3" key={this.props.key} onClick={this.onThisTileClick}>{this.props.alphabet}</button>
+          );
+
+    }else{
+      // already selected
+      const btnStyle = {
+        height: 60,
+        border: ['1px outset white'],
+        backgroundColor: 'red',
+        fontSize: '3em'
+      };
+      return(
+            <button style={btnStyle} id={this.props.ref} className="col-xs-3" key={this.props.key} onClick={this.onThisTileClick}>{this.props.alphabet}</button>
+          );
     }
-    disabled > {
-      this.props.alphabet
-    } < /button>);
   }
 });
 
