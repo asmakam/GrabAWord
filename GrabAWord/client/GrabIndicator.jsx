@@ -37,7 +37,7 @@ GrabIndicator = React.createClass({
         var divStyle = {
           marginTop: 10,
           marginBottom: 10,
-          fontSize: '1em',
+          fontSize: '2em',
           height: 30
         };
         return <div style={divStyle} className="indicatorContainer text-center"><p>Beaten by {username} </p></div>
