@@ -15,13 +15,13 @@ Meteor.methods({
     // Someone grabs a words
     grabWord(word, board, userid, username) {
       var inBoard;
-      //If the word is valid,
-      if (Words.find({key: word},{limit:1})) {
+      if (Words.find({key: word},{limit:1}).count()) {
+        // valid word
+
         inBoard = BoardWords.findOne({
             boardId: board,
             word: word
           });
-
         if (typeof inBoard != 'undefined') {
           // Grabbed, beaten to it
           return ['beaten', inBoard.username];

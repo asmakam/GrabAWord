@@ -11,7 +11,15 @@ GrabIndicator = React.createClass({
       height: 30
     };
 
-    switch(this.props.state[0]){
+    if(this.props.state.constructor === Array){
+      var status = this.props.state[0];
+      var username = this.props.state[1];
+    }else{
+      var status = this.props.state;
+      var username = '';
+    }
+
+    switch(status){
       case 'na':
         // Not applicable, nothing grabbed yet
         return <div style={divStyle} className="indicatorContainer text-center"><p> </p></div>
@@ -32,7 +40,7 @@ GrabIndicator = React.createClass({
           fontSize: '1em',
           height: 30
         };
-        return <div style={divStyle} className="indicatorContainer text-center"><p>Beaten by {this.props.state[1]} </p></div>
+        return <div style={divStyle} className="indicatorContainer text-center"><p>Beaten by {username} </p></div>
         break;
       case "incorrect":
         // incorrect word made
