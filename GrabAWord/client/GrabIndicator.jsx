@@ -40,7 +40,7 @@ GrabIndicator = React.createClass({
           fontSize: '2em',
           height: 30
         };
-        return <div style={divStyle} className="indicatorContainer text-center"><p>Beaten by {username} </p></div>
+        return <div style={divStyle} className="indicatorContainer text-center"><p>Grabbed by {username} :(</p></div>
         break;
       case "incorrect":
         // incorrect word made
