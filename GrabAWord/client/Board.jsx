@@ -18,7 +18,6 @@ Board = React.createClass({
       height: 5,
       board: Boards.findOne(),
       userId: Meteor.userId(),
-
     };
   },
 
@@ -26,7 +25,7 @@ Board = React.createClass({
       // --> Grab the word
       this.setState({ grabbedWordStatus: 'waiting'});
       Meteor.call('grabWord', this.state.selectedWord, this.data.board._id,
-        this.data.userId, (err, res) => {
+        this.data.userId,this.data.user.username, (err, res) => {
           this.setState({ grabbedWordStatus: res});
           let resetGrabIndicator = function(){
           this.setState({ grabbedWordStatus: 'na'});

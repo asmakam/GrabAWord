@@ -11,7 +11,7 @@ GrabIndicator = React.createClass({
       height: 30
     };
 
-    switch(this.props.state){
+    switch(this.props.state[0]){
       case 'na':
         // Not applicable, nothing grabbed yet
         return <div style={divStyle} className="indicatorContainer text-center"><p> </p></div>
@@ -26,7 +26,13 @@ GrabIndicator = React.createClass({
         break;
       case "beaten":
         // someone else beat you to it
-        return <div style={divStyle} className="indicatorContainer text-center"><p> :( </p></div>
+        var divStyle = {
+          marginTop: 10,
+          marginBottom: 10,
+          fontSize: '1em',
+          height: 30
+        };
+        return <div style={divStyle} className="indicatorContainer text-center"><p>Beaten by {this.props.state[1]} </p></div>
         break;
       case "incorrect":
         // incorrect word made

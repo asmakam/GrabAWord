@@ -13,20 +13,25 @@ Meteor.methods({
     },
 
     // Someone grabs a words
-    grabWord(word, board, user) {
-      //If the word is walid,
-      if (Words.findOne({
-          key: word
-        })) {
-        // Is the word in BoardWords
-        if (!BoardWords.findOne({
+    grabWord(word, board, userid, username) {
+      var inBoard;
+      //If the word is valid,
+      if (Words.find({key: word},{limit:1})) {
+        inBoard = BoardWords.findOne({
             boardId: board,
             word: word
-          })) {
+          });
+
+        if (typeof inBoard != 'undefined') {
+          // Grabbed, beaten to it
+          return ['beaten', inBoard.username];
+        } else {
+          // Not grabbed earlier
           var bwId = BoardWords.insert({
             boardId: board,
             word: word,
-            user: user,
+            user: userid,
+            username: username,
             points: 0
           });
           // Calculate points and update the word
@@ -34,10 +39,10 @@ Meteor.methods({
             Meteor.call('updateWordsWithPoints', bwId, word);
           });
           return 'success';
-        } else {
-          return 'beaten';
         }
+
       } else {
+        // Word not in our dictionary
         return 'incorrect';
       }
 
