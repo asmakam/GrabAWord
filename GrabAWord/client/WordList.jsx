@@ -10,7 +10,7 @@ WordList = React.createClass({
   getMeteorData() {
     var handle = Meteor.subscribe('wordsByUserInBoard', this.props.boardId, this.props.userId);
     return {
-      userWords: BoardWords.find().fetch()
+      userWords: BoardWords.find({user:this.props.userId}).fetch()
     };
   },
 
