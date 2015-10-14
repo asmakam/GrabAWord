@@ -7,6 +7,13 @@ Meteor.publish('latestBoard', () => {
   });
 });
 
+Meteor.publish('BoardUsers', (boardId, userId) => {
+  return BoardWords.find({
+    boardId: boardId,
+  },
+  {fields:{user:1}});
+});
+
 Meteor.publish('wordsByUserInBoard', (boardId, userId) => {
   return BoardWords.find({
     boardId: boardId,
@@ -34,12 +41,12 @@ Meteor.publish('leaderboard', (boardId) => {
 });
 
 Meteor.publish('leaderboardUsers', (boardId) => {
-	
+
   var list = Meteor.users.find().fetch();
-  
+
   Players.remove({});
   for(var idx = 0; idx < list.length; idx++) {
-    Players.insert({username: list[idx].username, idx: list[idx]._id}); 
+    Players.insert({username: list[idx].username, idx: list[idx]._id});
   }
 
   return Players.find();

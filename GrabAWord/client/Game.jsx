@@ -30,7 +30,7 @@ Game = React.createClass({
     return (
       <div className="content">
 
-        <NavBar />
+        <NavBar boardId={this.data.board._id}/>
 
         <div className="container">
           <div className="row">
